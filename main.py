@@ -91,7 +91,10 @@ def clean_data(data: InputData):
 async def upload_excel(file: UploadFile = File(...)):
     if not file.filename.endswith(".xlsx"):
         return {"error": "Only .xlsx files are supported."}
-
+     # ✅ Ensure folders exist
+    os.makedirs("uploads", exist_ok=True)
+    os.makedirs("cleaned", exist_ok=True)
+    
     # Save uploaded file
     input_path = f"uploads/{file.filename}"
     with open(input_path, "wb") as f:
@@ -130,6 +133,9 @@ async def upload_excel(file: UploadFile = File(...)):
                 "Zip Code": None
             })
 
+    
+
+   
     # Save cleaned Excel
     cleaned_df = pd.DataFrame(cleaned_rows)
     output_path = f"cleaned/cleaned_{file.filename}"
