@@ -1,0 +1,12 @@
+# Ignore Python virtual environment
+venv/
+
+# Ignore Excel file outputs and logs
+__pycache__/
+uploads/
+cleaned/
+*.xlsx
+
+# Ignore OS or editor files
+.DS_Store
+*.log
