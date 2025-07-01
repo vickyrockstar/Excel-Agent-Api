@@ -6,8 +6,19 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import Optional
 import re
+from fastapi.middleware.cors import CORSMiddleware
+
 
 app = FastAPI(title="Mini LLM Agent for Data Cleaning")
+
+# Allow frontend (localhost during development)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # or ["http://localhost:5173"] for stricter control
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Define input and output schemas
 class InputData(BaseModel):
